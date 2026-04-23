@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Crownless Knight – Official Game Site</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600;700&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    /* ── Reset & Base ── */
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    :root{
+      --gold:#c9a227;
+      --gold-light:#f0c44c;
+      --deep:#0a0609;
+      --dark:#100c12;
+      --mid:#1a1220;
+      --card:#16101e;
+      --border:#2e1e3a;
+      --red:#8b1a1a;
+      --red-light:#c0392b;
+      --text:#d4c5e2;
+      --text-dim:#8a7a98;
+      --font-display:'Cinzel Decorative',serif;
+      --font-title:'Cinzel',serif;
+      --font-body:'Raleway',sans-serif;
+    }
+    html{scroll-behavior:smooth;}
+    body{
+      background:var(--deep);
+      color:var(--text);
+      font-family:var(--font-body);
+      font-size:16px;
+      line-height:1.7;
+      overflow-x:hidden;
+    }
+    a{color:var(--gold);text-decoration:none;}
+    img{max-width:100%;}
+
+    /* ── Particles Background ── */
+    #particles{
+      position:fixed;top:0;left:0;width:100%;height:100%;
+      pointer-events:none;z-index:0;overflow:hidden;
+    }
+    .particle{
+      position:absolute;border-radius:50%;
+      animation:float linear infinite;
+      opacity:0;
+    }
+    @keyframes float{
+      0%{transform:translateY(100vh) rotate(0deg);opacity:0;}
+      10%{opacity:1;}
+      90%{opacity:.4;}
+      100%{transform:translateY(-10vh) rotate(720deg);opacity:0;}
+    }
+
+    /* ── Nav ── */
+    nav{
+      position:fixed;top:0;width:100%;z-index:1000;
+      background:linear-gradient(180deg,rgba(10,6,9,.97) 0%,rgba(10,6,9,.8) 100%);
+      border-bottom:1px solid rgba(201,162,39,.25);
+      display:flex;align-items:center;justify-content:space-between;
+      padding:.9rem 5%;
+      backdrop-filter:blur(8px);
+      transition:all .3s;
+    }
+    .nav-logo{
+      font-family:var(--font-display);
+      font-size:1.15rem;color:var(--gold);letter-spacing:.05em;
+      text-shadow:0 0 20px rgba(201,162,39,.6);
+    }
+    .nav-links{display:flex;gap:2rem;list-style:none;}
+    .nav-links a{
+      font-family:var(--font-title);font-size:.8rem;letter-spacing:.12em;
+      text-transform:uppercase;color:var(--text-dim);
+      transition:color .25s;
+    }
+    .nav-links a:hover{color:var(--gold);}
+    .nav-cta{
+      font-family:var(--font-title);font-size:.8rem;letter-spacing:.1em;
+      text-transform:uppercase;padding:.5rem 1.4rem;
+      border:1px solid var(--gold);color:var(--gold);
+      transition:all .3s;cursor:pointer;background:transparent;
+    }
+    .nav-cta:hover{background:var(--gold);color:var(--deep);}
+    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;}
+    .hamburger span{width:25px;height:2px;background:var(--gold);transition:all .3s;}
+
+    /* ── Hero ── */
+    #hero{
+      position:relative;min-height:100vh;
+      display:flex;align-items:center;justify-content:center;
+      text-align:center;overflow:hidden;
+      background:radial-gradient(ellipse at 50% 60%,#1e0a2e 0%,#0a0609 70%);
+    }
+    .hero-bg{
+      position:absolute;inset:0;
+      background:
+        radial-gradient(ellipse at 50% 100%,rgba(139,26,26,.3) 0%,transparent 60%),
+        radial-gradient(ellipse at 50% 0%,rgba(201,162,39,.05) 0%,transparent 60%);
+    }
+    .hero-runes{
+      position:absolute;inset:0;
+      background-image:
+        repeating-linear-gradient(0deg,transparent,transparent 60px,rgba(201,162,39,.03) 60px,rgba(201,162,39,.03) 61px),
+        repeating-linear-gradient(90deg,transparent,transparent 60px,rgba(201,162,39,.03) 60px,rgba(201,162,39,.03) 61px);
+    }
+    .hero-content{position:relative;z-index:2;max-width:900px;padding:2rem;}
+    .hero-studio{
+      font-family:var(--font-title);font-size:.75rem;
+      letter-spacing:.4em;text-transform:uppercase;color:var(--text-dim);
+      margin-bottom:1.5rem;
+    }
+    .hero-title{
+      font-family:var(--font-display);
+      font-size:clamp(3rem,8vw,6.5rem);
+      line-height:1.05;
+      background:linear-gradient(135deg,#f0c44c 0%,#c9a227 40%,#8b5e0a 100%);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+      background-clip:text;
+      text-shadow:none;
+      filter:drop-shadow(0 0 40px rgba(201,162,39,.4));
+      margin-bottom:1rem;
+    }
+    .hero-subtitle{
+      font-family:var(--font-title);font-size:clamp(1rem,2.5vw,1.35rem);
+      letter-spacing:.25em;text-transform:uppercase;
+      color:var(--text-dim);margin-bottom:.5rem;
+    }
+    .hero-tagline{
+      font-size:1.1rem;color:var(--text);max-width:600px;margin:1rem auto 2.5rem;
+      font-weight:300;
+    }
+    .hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+    .btn-primary{
+      font-family:var(--font-title);letter-spacing:.15em;text-transform:uppercase;
+      padding:.9rem 2.5rem;font-size:.85rem;
+      background:linear-gradient(135deg,var(--gold),#8b5e0a);
+      color:var(--deep);border:none;cursor:pointer;
+      clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px));
+      transition:filter .3s;font-weight:700;
+    }
+    .btn-primary:hover{filter:brightness(1.2);}
+    .btn-secondary{
+      font-family:var(--font-title);letter-spacing:.15em;text-transform:uppercase;
+      padding:.9rem 2.5rem;font-size:.85rem;
+      background:transparent;color:var(--gold);
+      border:1px solid rgba(201,162,39,.5);cursor:pointer;
+      transition:all .3s;
+    }
+    .btn-secondary:hover{border-color:var(--gold);background:rgba(201,162,39,.08);}
+    .hero-scroll{
+      position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);
+      font-family:var(--font-title);font-size:.7rem;letter-spacing:.3em;
+      text-transform:uppercase;color:var(--text-dim);
+      display:flex;flex-direction:column;align-items:center;gap:.5rem;
+      animation:bounce 2s infinite;
+    }
+    .hero-scroll::after{
+      content:'';width:1px;height:40px;
+      background:linear-gradient(180deg,var(--gold),transparent);
+    }
+    @keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(-8px);}}
+
+    /* ── Section Base ── */
+    section{position:relative;z-index:1;}
+    .section-inner{max-width:1200px;margin:0 auto;padding:6rem 5%;}
+    .section-header{text-align:center;margin-bottom:4rem;}
+    .section-label{
+      font-family:var(--font-title);font-size:.7rem;letter-spacing:.4em;
+      text-transform:uppercase;color:var(--gold);margin-bottom:.75rem;display:block;
+    }
+    .section-title{
+      font-family:var(--font-display);
+      font-size:clamp(1.8rem,4vw,3rem);
+      color:#fff;line-height:1.1;
+    }
+    .section-divider{
+      width:80px;height:2px;
+      background:linear-gradient(90deg,transparent,var(--gold),transparent);
+      margin:1.5rem auto;
+    }
+    .section-desc{max-width:650px;margin:0 auto;color:var(--text-dim);font-size:1rem;}
+
+    /* ── Story ── */
+    #story{background:linear-gradient(180deg,var(--deep) 0%,#0e0716 100%);}
+    .story-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
+    .story-visual{
+      position:relative;display:flex;justify-content:center;align-items:center;
+    }
+    .story-emblem{
+      width:300px;height:300px;border-radius:50%;
+      background:radial-gradient(circle at 40% 35%,#2a1040 0%,#0e0716 70%);
+      border:2px solid rgba(201,162,39,.3);
+      box-shadow:0 0 60px rgba(201,162,39,.15),inset 0 0 60px rgba(139,26,26,.15);
+      display:flex;flex-direction:column;align-items:center;justify-content:center;
+      font-family:var(--font-display);text-align:center;
+    }
+    .emblem-icon{font-size:5rem;margin-bottom:.5rem;filter:drop-shadow(0 0 20px rgba(201,162,39,.5));}
+    .emblem-text{font-size:.65rem;letter-spacing:.3em;color:var(--gold);text-transform:uppercase;}
+    .story-ring{
+      position:absolute;width:340px;height:340px;border-radius:50%;
+      border:1px dashed rgba(201,162,39,.2);
+      animation:spin 30s linear infinite;
+    }
+    @keyframes spin{to{transform:rotate(360deg);}}
+    .story-text h2{
+      font-family:var(--font-display);font-size:2.2rem;color:var(--gold);
+      margin-bottom:1.5rem;line-height:1.2;
+    }
+    .story-text p{color:var(--text-dim);margin-bottom:1rem;font-size:1rem;}
+    .story-text p strong{color:var(--text);}
+    .story-quote{
+      border-left:3px solid var(--gold);padding-left:1.2rem;margin:1.5rem 0;
+      font-style:italic;color:var(--text-dim);font-size:1rem;
+    }
+
+    /* ── Genres ── */
+    #genres{background:var(--dark);}
+    .genres-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;}
+    .genre-card{
+      background:var(--card);border:1px solid var(--border);
+      padding:2rem 1.5rem;transition:all .3s;position:relative;overflow:hidden;
+    }
+    .genre-card::before{
+      content:'';position:absolute;top:0;left:0;right:0;height:2px;
+      background:linear-gradient(90deg,transparent,var(--gold),transparent);
+      transform:scaleX(0);transition:transform .3s;
+    }
+    .genre-card:hover::before{transform:scaleX(1);}
+    .genre-card:hover{border-color:rgba(201,162,39,.4);transform:translateY(-4px);}
+    .genre-icon{font-size:2.5rem;margin-bottom:1rem;display:block;}
+    .genre-name{
+      font-family:var(--font-title);font-size:1rem;color:var(--gold);
+      margin-bottom:.75rem;letter-spacing:.08em;
+    }
+    .genre-desc{font-size:.88rem;color:var(--text-dim);}
+
+    /* ── Attributes ── */
+    #attributes{
+      background:linear-gradient(180deg,var(--dark) 0%,#0a0609 50%,var(--dark) 100%);
+    }
+    .attrs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+    .attr-card{
+      background:var(--card);border:1px solid var(--border);
+      padding:1.75rem;transition:all .35s;position:relative;overflow:hidden;
+      cursor:default;
+    }
+    .attr-card::after{
+      content:'';position:absolute;inset:0;
+      background:linear-gradient(135deg,rgba(201,162,39,.06) 0%,transparent 60%);
+      opacity:0;transition:opacity .3s;
+    }
+    .attr-card:hover::after{opacity:1;}
+    .attr-card:hover{transform:translateY(-4px);border-color:rgba(201,162,39,.35);}
+    .attr-header{display:flex;align-items:center;gap:1rem;margin-bottom:1.25rem;}
+    .attr-icon{font-size:2rem;width:52px;height:52px;display:flex;align-items:center;justify-content:center;
+      background:rgba(201,162,39,.08);border:1px solid rgba(201,162,39,.2);border-radius:4px;}
+    .attr-name{font-family:var(--font-title);font-size:1.1rem;color:#fff;}
+    .attr-role{font-size:.75rem;color:var(--gold);letter-spacing:.1em;text-transform:uppercase;}
+    .attr-stats{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1rem;}
+    .stat-row{display:flex;align-items:center;gap:.5rem;font-size:.82rem;}
+    .stat-row .plus{color:#4dba74;}
+    .stat-row .minus{color:#e05c5c;}
+    .attr-desc{font-size:.82rem;color:var(--text-dim);}
+
+    /* ── Biomes ── */
+    #biomes{background:var(--dark);}
+    .biomes-tabs{display:flex;gap:0;margin-bottom:3rem;border:1px solid var(--border);}
+    .biome-tab{
+      flex:1;padding:1rem;text-align:center;cursor:pointer;
+      font-family:var(--font-title);font-size:.85rem;letter-spacing:.1em;
+      text-transform:uppercase;color:var(--text-dim);border:none;
+      background:transparent;transition:all .3s;
+    }
+    .biome-tab.active,.biome-tab:hover{color:var(--gold);background:rgba(201,162,39,.07);}
+    .biome-tab.active{border-bottom:2px solid var(--gold);}
+    .biome-content{display:none;}
+    .biome-content.active{display:grid;grid-template-columns:1fr 1.2fr;gap:4rem;align-items:start;}
+    .biome-info{position:sticky;top:100px;}
+    .biome-badge{
+      display:inline-block;font-family:var(--font-title);font-size:.7rem;
+      letter-spacing:.25em;text-transform:uppercase;color:var(--deep);
+      padding:.3rem .9rem;margin-bottom:1.2rem;
+    }
+    .plains-badge{background:linear-gradient(135deg,#4dba74,#2a7a45);}
+    .forest-badge{background:linear-gradient(135deg,#2a6e2a,#1a3d1a);}
+    .dungeon-badge{background:linear-gradient(135deg,var(--red-light),var(--red));}
+    .biome-title{font-family:var(--font-display);font-size:2rem;color:#fff;margin-bottom:1rem;}
+    .biome-desc{color:var(--text-dim);margin-bottom:1.5rem;}
+    .biome-stages{
+      display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.5rem;
+    }
+    .stage-pill{
+      font-family:var(--font-title);font-size:.7rem;letter-spacing:.1em;
+      padding:.25rem .75rem;border:1px solid rgba(201,162,39,.3);
+      color:var(--gold);text-transform:uppercase;
+    }
+    .boss-card{
+      background:linear-gradient(135deg,rgba(139,26,26,.15),rgba(10,6,9,.9));
+      border:1px solid rgba(139,26,26,.4);padding:1.5rem;margin-top:1.5rem;
+    }
+    .boss-label{font-family:var(--font-title);font-size:.65rem;letter-spacing:.25em;
+      text-transform:uppercase;color:var(--red-light);margin-bottom:.5rem;}
+    .boss-name{font-family:var(--font-title);font-size:1.2rem;color:#fff;margin-bottom:.5rem;}
+    .boss-desc{font-size:.85rem;color:var(--text-dim);}
+    .enemies-list{display:flex;flex-direction:column;gap:.75rem;}
+    .enemy-row{
+      display:flex;align-items:start;gap:1rem;padding:1rem;
+      background:var(--card);border:1px solid var(--border);transition:all .2s;
+    }
+    .enemy-row:hover{border-color:rgba(201,162,39,.3);}
+    .enemy-icon{font-size:1.8rem;flex-shrink:0;width:40px;text-align:center;margin-top:.1rem;}
+    .enemy-name{font-family:var(--font-title);font-size:.9rem;color:#fff;margin-bottom:.25rem;}
+    .enemy-desc{font-size:.8rem;color:var(--text-dim);}
+
+    /* ── Characters ── */
+    #characters{
+      background:radial-gradient(ellipse at center,#120920 0%,var(--dark) 70%);
+    }
+    .chars-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+    .char-card{
+      background:var(--card);border:1px solid var(--border);
+      padding:1.75rem;transition:all .3s;
+    }
+    .char-card:hover{border-color:rgba(201,162,39,.3);transform:translateY(-3px);}
+    .char-icon{font-size:2.5rem;margin-bottom:.75rem;display:block;}
+    .char-name{font-family:var(--font-title);font-size:1rem;color:var(--gold);margin-bottom:.5rem;}
+    .char-desc{font-size:.82rem;color:var(--text-dim);}
+
+    /* ── Weapons ── */
+    #weapons{background:var(--dark);}
+    .weapons-tabs{display:flex;gap:.75rem;margin-bottom:2.5rem;}
+    .weapon-tab{
+      font-family:var(--font-title);font-size:.78rem;letter-spacing:.1em;
+      text-transform:uppercase;padding:.5rem 1.5rem;border:1px solid var(--border);
+      background:transparent;color:var(--text-dim);cursor:pointer;transition:all .3s;
+    }
+    .weapon-tab.active,.weapon-tab:hover{border-color:var(--gold);color:var(--gold);}
+    .weapon-tab.active{background:rgba(201,162,39,.08);}
+    .weapons-panel{display:none;}
+    .weapons-panel.active{display:block;}
+    .weapons-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;}
+    .weapon-card{
+      background:var(--card);border:1px solid var(--border);
+      padding:1.25rem;transition:all .25s;
+    }
+    .weapon-card:hover{border-color:rgba(201,162,39,.35);transform:translateY(-2px);}
+    .weapon-name{font-family:var(--font-title);font-size:.9rem;color:var(--gold);margin-bottom:.4rem;}
+    .weapon-desc{font-size:.78rem;color:var(--text-dim);}
+
+    /* ── Items ── */
+    #items{background:linear-gradient(180deg,var(--dark) 0%,#0a0609 100%);}
+    .tiers-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2rem;}
+    .tier-block{background:var(--card);border:1px solid var(--border);padding:2rem;}
+    .tier-header{display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;}
+    .tier-badge{
+      font-family:var(--font-title);font-size:.65rem;letter-spacing:.2em;
+      text-transform:uppercase;padding:.25rem .75rem;font-weight:700;
+    }
+    .t1-badge{background:rgba(180,180,180,.15);color:#aaa;border:1px solid #555;}
+    .t2-badge{background:rgba(100,180,100,.1);color:#5da85d;border:1px solid #3d703d;}
+    .t3-badge{background:rgba(100,130,255,.1);color:#7088ff;border:1px solid #4455cc;}
+    .t4-badge{background:rgba(255,160,30,.12);color:var(--gold-light);border:1px solid rgba(201,162,39,.5);}
+    .tier-name{font-family:var(--font-title);font-size:1.1rem;color:#fff;}
+    .item-list{display:flex;flex-direction:column;gap:.6rem;}
+    .item-row{
+      display:flex;justify-content:space-between;align-items:start;
+      padding:.6rem .75rem;border-bottom:1px solid rgba(255,255,255,.05);
+      font-size:.82rem;gap:1rem;
+    }
+    .item-name{color:#fff;font-weight:600;flex-shrink:0;min-width:120px;}
+    .item-details{color:var(--text-dim);text-align:right;font-size:.78rem;}
+
+    /* ── Multiplayer ── */
+    #multiplayer{
+      background:radial-gradient(ellipse at 50% 50%,#130922 0%,var(--dark) 70%);
+    }
+    .mp-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;}
+    .mp-modes{display:flex;flex-direction:column;gap:1.5rem;}
+    .mp-mode{
+      background:var(--card);border:1px solid var(--border);padding:1.75rem;
+      transition:all .3s;
+    }
+    .mp-mode:hover{border-color:rgba(201,162,39,.35);}
+    .mp-mode-icon{font-size:2rem;margin-bottom:.75rem;display:block;}
+    .mp-mode-name{font-family:var(--font-title);font-size:1rem;color:var(--gold);margin-bottom:.5rem;}
+    .mp-mode-desc{font-size:.85rem;color:var(--text-dim);}
+    .mp-features{display:flex;flex-direction:column;gap:1rem;}
+    .mp-feature{
+      display:flex;gap:1rem;align-items:start;padding:1.25rem;
+      background:var(--card);border:1px solid var(--border);
+    }
+    .mp-feat-icon{font-size:1.5rem;flex-shrink:0;}
+    .mp-feat-title{font-family:var(--font-title);font-size:.9rem;color:#fff;margin-bottom:.25rem;}
+    .mp-feat-desc{font-size:.8rem;color:var(--text-dim);}
+
+    /* ── Game Modes ── */
+    #modes{background:var(--dark);}
+    .modes-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;}
+    .mode-card{
+      background:var(--card);border:1px solid var(--border);padding:2.5rem;
+      transition:all .3s;position:relative;overflow:hidden;
+    }
+    .mode-card::before{
+      content:'';position:absolute;top:0;right:0;width:200px;height:200px;
+      border-radius:50%;opacity:.06;
+    }
+    .campaign-card::before{background:var(--gold);}
+    .endless-card::before{background:var(--red-light);}
+    .mode-card:hover{transform:translateY(-4px);}
+    .mode-icon{font-size:3rem;margin-bottom:1rem;display:block;}
+    .mode-name{font-family:var(--font-display);font-size:1.8rem;color:#fff;margin-bottom:.75rem;}
+    .mode-desc{color:var(--text-dim);margin-bottom:1.5rem;}
+    .mode-features{list-style:none;display:flex;flex-direction:column;gap:.5rem;}
+    .mode-features li{
+      font-size:.85rem;color:var(--text);padding-left:1.5rem;position:relative;
+    }
+    .mode-features li::before{
+      content:'◆';position:absolute;left:0;
+      font-size:.5rem;color:var(--gold);top:.3rem;
+    }
+
+    /* ── Footer ── */
+    footer{
+      background:var(--deep);border-top:1px solid rgba(201,162,39,.15);
+      padding:4rem 5% 2rem;
+    }
+    .footer-inner{max-width:1200px;margin:0 auto;}
+    .footer-top{
+      display:grid;grid-template-columns:2fr 1fr 1fr 1fr;
+      gap:3rem;margin-bottom:3rem;
+    }
+    .footer-brand-name{
+      font-family:var(--font-display);font-size:1.4rem;color:var(--gold);
+      margin-bottom:.75rem;
+    }
+    .footer-brand-desc{font-size:.85rem;color:var(--text-dim);}
+    .footer-col h4{
+      font-family:var(--font-title);font-size:.75rem;letter-spacing:.25em;
+      text-transform:uppercase;color:var(--gold);margin-bottom:1rem;
+    }
+    .footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.5rem;}
+    .footer-col ul li a{font-size:.85rem;color:var(--text-dim);transition:color .2s;}
+    .footer-col ul li a:hover{color:var(--text);}
+    .footer-bottom{
+      border-top:1px solid rgba(255,255,255,.05);padding-top:1.5rem;
+      display:flex;justify-content:space-between;align-items:center;
+      font-size:.78rem;color:var(--text-dim);flex-wrap:wrap;gap:1rem;
+    }
+    .footer-credits span{color:var(--gold);}
+
+    /* ── Scroll Reveal ── */
+    .reveal{
+      opacity:0;transform:translateY(30px);
+      transition:opacity .7s ease,transform .7s ease;
+    }
+    .reveal.visible{opacity:1;transform:translateY(0);}
+    .reveal-delay-1{transition-delay:.1s;}
+    .reveal-delay-2{transition-delay:.2s;}
+    .reveal-delay-3{transition-delay:.3s;}
+    .reveal-delay-4{transition-delay:.4s;}
+
+    /* ── Progress Bar ── */
+    #progress-bar{
+      position:fixed;top:0;left:0;height:2px;width:0%;
+      background:linear-gradient(90deg,var(--red),var(--gold));
+      z-index:9999;transition:width .1s;
+    }
+
+    /* ── Responsive ── */
+    @media(max-width:1024px){
+      .genres-grid{grid-template-columns:repeat(2,1fr);}
+      .attrs-grid{grid-template-columns:repeat(2,1fr);}
+      .chars-grid{grid-template-columns:repeat(2,1fr);}
+      .weapons-grid{grid-template-columns:repeat(3,1fr);}
+      .footer-top{grid-template-columns:1fr 1fr;}
+    }
+    @media(max-width:768px){
+      .nav-links,.nav-cta{display:none;}
+      .hamburger{display:flex;}
+      .story-grid,.biome-content.active,.mp-grid,.modes-grid,.tiers-grid{grid-template-columns:1fr;}
+      .genres-grid,.attrs-grid{grid-template-columns:1fr 1fr;}
+      .chars-grid{grid-template-columns:1fr 1fr;}
+      .weapons-grid{grid-template-columns:repeat(2,1fr);}
+      .footer-top{grid-template-columns:1fr 1fr;}
+      .biomes-tabs{flex-direction:column;}
+      .biome-info{position:static;}
+    }
+    @media(max-width:480px){
+      .genres-grid,.attrs-grid,.chars-grid,.weapons-grid{grid-template-columns:1fr;}
+      .footer-top{grid-template-columns:1fr;}
+    }
+  </style>
+</head>
+<body>
+
+<!-- Progress Bar -->
+<div id="progress-bar"></div>
+
+<!-- Particles -->
+<div id="particles"></div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <span class="nav-logo">⚔ Crownless Knight</span>
+  <ul class="nav-links">
+    <li><a href="#story">Story</a></li>
+    <li><a href="#attributes">Builds</a></li>
+    <li><a href="#biomes">World</a></li>
+    <li><a href="#weapons">Weapons</a></li>
+    <li><a href="#multiplayer">Multiplayer</a></li>
+    <li><a href="#modes">Modes</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.getElementById('modes').scrollIntoView({behavior:'smooth'})">Play Now</button>
+  <div class="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-runes"></div>
+  <div class="hero-content">
+    <p class="hero-studio">Flow State Studios · 2026</p>
+    <h1 class="hero-title">Crownless<br>Knight</h1>
+    <p class="hero-subtitle">Arcade Dungeon Crawler · Roguelite</p>
+    <p class="hero-tagline">A lone survivor. A shattered kingdom. One quest for vengeance against the Undead King.</p>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="document.getElementById('story').scrollIntoView({behavior:'smooth'})">Discover the Legend</button>
+      <button class="btn-secondary" onclick="document.getElementById('modes').scrollIntoView({behavior:'smooth'})">View Game Modes</button>
+    </div>
+  </div>
+  <div class="hero-scroll">Scroll</div>
+</section>
+
+<!-- STORY -->
+<section id="story">
+  <div class="section-inner">
+    <div class="story-grid">
+      <div class="story-visual">
+        <div class="story-ring"></div>
+        <div class="story-emblem">
+          <div class="emblem-icon">🏰</div>
+          <div class="emblem-text">Crownless Knight</div>
+        </div>
+      </div>
+      <div class="story-text reveal">
+        <h2>A Kingdom Lost,<br>A Knight Reborn</h2>
+        <p>Years ago, a peaceful village was destroyed by an army of the undead. Only one survived — <strong>a young boy who witnessed the massacre</strong>. With his home reduced to ashes and his family gone, the boy carried that pain into adulthood.</p>
+        <p>Now known as the <strong>Crownless Knight</strong>, he has trained in battle and hardened his resolve. Guided by loss and fueled by anger, he sets out on a dangerous journey to confront the <strong>Undead King</strong> — the one responsible for the destruction of his world — and bring an end to his reign.</p>
+        <blockquote class="story-quote">"He wears no crown, swears no oath to any lord — only to the dead who cannot speak for themselves."</blockquote>
+        <p>Navigate treacherous biomes, survive relentless enemy waves, build your arsenal, and face three devastating bosses standing between you and your destiny.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GENRES -->
+<section id="genres">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <span class="section-label">Game Identity</span>
+      <h2 class="section-title">Four Pillars of Gameplay</h2>
+      <div class="section-divider"></div>
+      <p class="section-desc">Crownless Knight fuses four distinct genres into a seamless, high-octane experience.</p>
+    </div>
+    <div class="genres-grid">
+      <div class="genre-card reveal reveal-delay-1">
+        <span class="genre-icon">⚡</span>
+        <div class="genre-name">Arcade Action</div>
+        <p class="genre-desc">Fast-paced, top-down combat in 3D arenas where movement, positioning, and sharp reflexes are essential for survival.</p>
+      </div>
+      <div class="genre-card reveal reveal-delay-2">
+        <span class="genre-icon">🎲</span>
+        <div class="genre-name">Roguelite</div>
+        <p class="genre-desc">Persistent progression through runs where players select different attribute builds to define their playstyle before entering the dungeon.</p>
+      </div>
+      <div class="genre-card reveal reveal-delay-3">
+        <span class="genre-icon">🏛️</span>
+        <div class="genre-name">Dungeon Crawler</div>
+        <p class="genre-desc">Exploration through three distinct, increasingly difficult biomes — Plains, Forest, and Dungeon — culminating in intense boss encounters.</p>
+      </div>
+      <div class="genre-card reveal reveal-delay-4">
+        <span class="genre-icon">🤝</span>
+        <div class="genre-name">Co-op Multiplayer</div>
+        <p class="genre-desc">Peer-to-peer architecture allowing 1-2 players to navigate dangerous stages, share enemy encounters, and fight together in real-time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ATTRIBUTES -->
+<section id="attributes">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <span class="section-label">Character Builds</span>
+      <h2 class="section-title">Choose Your Attribute</h2>
+      <div class="section-divider"></div>
+      <p class="section-desc">Before each run, select a build preset that defines your stats and playstyle. Every attribute changes how you survive.</p>
+    </div>
+    <div class="attrs-grid">
+      <div class="attr-card reveal reveal-delay-1">
+        <div class="attr-header">
+          <div class="attr-icon">⚔️</div>
+          <div>
+            <div class="attr-name">Melee</div>
+            <div class="attr-role">The Furious Fighter</div>
+          </div>
+        </div>
+        <div class="attr-stats">
+          <div class="stat-row"><span class="plus">+</span> 5 Damage</div>
+          <div class="stat-row"><span class="plus">+</span> 15% Attack Speed</div>
+          <div class="stat-row"><span class="plus">+</span> 5% Life Steal</div>
+          <div class="stat-row"><span class="minus">−</span> 3 Max HP</div>
+          <div class="stat-row"><span class="minus">−</span> 25 Range</div>
+        </div>
+        <p class="attr-desc">High attack speed and bonus damage allow overwhelming offense. Reduced survivability makes positioning crucial.</p>
+      </div>
+      <div class="attr-card reveal reveal-delay-2">
+        <div class="attr-header">
+          <div class="attr-icon">🛡️</div>
+          <div>
+            <div class="attr-name">Tank</div>
+            <div class="attr-role">The Stalwart Guardian</div>
+          </div>
+        </div>
+        <div class="attr-stats">
+          <div class="stat-row"><span class="plus">+</span> 15 Max HP</div>
+          <div class="stat-row"><span class="plus">+</span> 5 HP Regeneration</div>
+          <div class="stat-row"><span class="minus">−</span> 5% Attack Speed</div>
+          <div class="stat-row"><span class="minus">−</span> 2 Movement Speed</div>
+        </div>
+        <p class="attr-desc">Built for endurance. Thrives in prolonged fights and dense waves. Lower damage but significantly higher survivability.</p>
+      </div>
+      <div class="attr-card reveal reveal-delay-3">
+        <div class="attr-header">
+          <div class="attr-icon">🏹</div>
+          <div>
+            <div class="attr-name">Ranger</div>
+            <div class="attr-role">The Swift Archer</div>
+          </div>
+        </div>
+        <div class="attr-stats">
+          <div class="stat-row"><span class="plus">+</span> 50 Range</div>
+          <div class="stat-row"><span class="plus">+</span> 10% Attack Speed</div>
+          <div class="stat-row"><span class="plus">+</span> 5% Critical Chance</div>
+          <div class="stat-row"><span class="minus">−</span> 10 Max HP</div>
+          <div class="stat-row"><span class="minus">−</span> 5 HP Regeneration</div>
+        </div>
+        <p class="attr-desc">Excels at distance combat and mobility-based survival. Extended range allows safer positioning, crit bonuses reward precision.</p>
+      </div>
+      <div class="attr-card reveal reveal-delay-1">
+        <div class="attr-header">
+          <div class="attr-icon">🗡️</div>
+          <div>
+            <div class="attr-name">Assassin</div>
+            <div class="attr-role">The Shadow Stalker</div>
+          </div>
+        </div>
+        <div class="attr-stats">
+          <div class="stat-row"><span class="plus">+</span> 15% Critical Chance</div>
+          <div class="stat-row"><span class="plus">+</span> 10% Movement Speed</div>
+          <div class="stat-row"><span class="plus">+</span> 5 Damage</div>
+          <div class="stat-row"><span class="minus">−</span> 5 Max HP</div>
+          <div class="stat-row"><span class="minus">−</span> 5 HP Regeneration</div>
+        </div>
+        <p class="attr-desc">High-risk, high-reward. Exceptional mobility and critical damage allow fast enemy elimination — but mistakes are punished heavily.</p>
+      </div>
+      <div class="attr-card reveal reveal-delay-2">
+        <div class="attr-header">
+          <div class="attr-icon">🔮</div>
+          <div>
+            <div class="attr-name">Mage</div>
+            <div class="attr-role">The Arcane Channeler</div>
+          </div>
+        </div>
+        <div class="attr-stats">
+          <div class="stat-row"><span class="plus">+</span> 10% Elemental Damage</div>
+          <div class="stat-row"><span class="plus">+</span> 5% Attack Speed</div>
+          <div class="stat-row"><span class="plus">+</span> 30 Range</div>
+          <div class="stat-row"><span class="minus">−</span> 3 Max HP</div>
+        </div>
+        <p class="attr-desc">Favors magical weapon builds. Increased range and scaling bonuses make this powerful when paired with energy or spell-type weapons.</p>
+      </div>
+      <div class="attr-card reveal reveal-delay-3">
+        <div class="attr-header">
+          <div class="attr-icon">🧛</div>
+          <div>
+            <div class="attr-name">Vampire</div>
+            <div class="attr-role">The Life Drainer</div>
+          </div>
+        </div>
+        <div class="attr-stats">
+          <div class="stat-row"><span class="plus">+</span> 20% Life Steal</div>
+          <div class="stat-row"><span class="plus">+</span> 3 Max HP</div>
+          <div class="stat-row"><span class="minus">−</span> 2 Damage</div>
+          <div class="stat-row"><span class="minus">−</span> 10% Attack Speed</div>
+        </div>
+        <p class="attr-desc">Specializes in sustain. Lifesteal enables recovery during combat, making this build strong in longer waves with good weapon synergies.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BIOMES -->
+<section id="biomes">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <span class="section-label">The World</span>
+      <h2 class="section-title">Three Deadly Biomes</h2>
+      <div class="section-divider"></div>
+      <p class="section-desc">A 15-stage campaign across three increasingly dangerous regions, each culminating in a devastating boss encounter.</p>
+    </div>
+    <div class="biomes-tabs">
+      <button class="biome-tab active" onclick="switchBiome('plains',this)">🌿 Plains</button>
+      <button class="biome-tab" onclick="switchBiome('forest',this)">🌲 Forest</button>
+      <button class="biome-tab" onclick="switchBiome('dungeon',this)">💀 Dungeon</button>
+    </div>
+    <!-- Plains -->
+    <div class="biome-content active" id="biome-plains">
+      <div class="biome-info">
+        <span class="biome-badge plains-badge">Stages 1 – 5</span>
+        <h3 class="biome-title">The Plains</h3>
+        <p class="biome-desc">The introduction to the game's core mechanics. Open terrain and scattered ruins allow players to move freely while learning enemy behaviors. Ideal for mastering auto-combat positioning and build progression.</p>
+        <div class="biome-stages">
+          <span class="stage-pill">Stage 1</span><span class="stage-pill">Stage 2</span>
+          <span class="stage-pill">Stage 3</span><span class="stage-pill">Stage 4</span>
+          <span class="stage-pill">Stage 5 ⚔</span>
+        </div>
+        <div class="boss-card">
+          <div class="boss-label">Plains Boss</div>
+          <div class="boss-name">🌳 Tree Monster</div>
+          <p class="boss-desc">A massive, ancient creature rooted in the Plains. Uses sweeping branches and ground stomps to control space. Slow but extremely resilient — dodging timing is key.</p>
+        </div>
+      </div>
+      <div class="enemies-list">
+        <div class="enemy-row"><div class="enemy-icon">💀</div><div><div class="enemy-name">Skeleton</div><div class="enemy-desc">Classic melee enemy with moderate health. Attacks in straightforward patterns — predictable but relentless in groups.</div></div></div>
+        <div class="enemy-row"><div class="enemy-icon">👺</div><div><div class="enemy-name">Goblin</div><div class="enemy-desc">Fast and tricky. Uses hit-and-run tactics, occasionally dodging attacks and harassing from unexpected angles.</div></div></div>
+        <div class="enemy-row"><div class="enemy-icon">🦇</div><div><div class="enemy-name">Bat</div><div class="enemy-desc">Small, fast, and agile. Swarms the player in groups — easy individually, but dangerous in numbers.</div></div></div>
+        <div class="enemy-row"><div class="enemy-icon">🏹</div><div><div class="enemy-name">Elf Archer</div><div class="enemy-desc">Attacks from a distance with fast, precise shots. Often appears in groups, creating crossfire situations that force constant movement.</div></div></div>
+      </div>
+    </div>
+    <!-- Forest -->
+    <div class="biome-content" id="biome-forest">
+      <div class="biome-info">
+        <span class="biome-badge forest-badge">Stages 6 – 10</span>
+        <h3 class="biome-title">The Forest</h3>
+        <p class="biome-desc">Tighter arenas, denser enemy waves, and more aggressive combinations. Visibility is reduced by thick trees and environmental obstacles, increasing pressure and limiting safe movement paths.</p>
+        <div class="biome-stages">
+          <span class="stage-pill">Stage 6</span><span class="stage-pill">Stage 7</span>
+          <span class="stage-pill">Stage 8</span><span class="stage-pill">Stage 9</span>
+          <span class="stage-pill">Stage 10 ⚔</span>
+        </div>
+        <div class="boss-card">
+          <div class="boss-label">Forest Boss</div>
+          <div class="boss-name">🗿 Guardian Golem</div>
+          <p class="boss-desc">Stone and wood fused into a towering guardian. Attacks with powerful melee strikes and shockwaves, punishing players who stay too close. Requires careful positioning and patience.</p>
+        </div>
+      </div>
+      <div class="enemies-list">
+        <div class="enemy-row"><div class="enemy-icon">🦅</div><div><div class="enemy-name">Harpy</div><div class="enemy-desc">Larger than bats. Swoops down to attack and retreats quickly. Aerial attacks can catch players off guard in narrow spaces.</div></div></div>
+        <div class="enemy-row"><div class="enemy-icon">🧙</div><div><div class="enemy-name">Mage</div><div class="enemy-desc">Summons smaller enemies like Bats and Skeletons to overwhelm the player. Weak in direct combat but dangerous if ignored.</div></div></div>
+        <div class="enemy-row"><div class="enemy-icon">⚔️</div><div><div class="enemy-name">Undead Knight</div><div class="enemy-desc">Tough frontline enemy with high health and strong attacks. Moves slower than regular enemies but can withstand a lot of damage.</div></div></div>
+        <div class="enemy-row"><div class="enemy-icon">💀</div><div><div class="enemy-name">Skeleton (Elite)</div><div class="enemy-desc">Returns in larger numbers with increased coordination. More dangerous in group compositions alongside Harpies.</div></div></div>
+      </div>
+    </div>
+    <!-- Dungeon -->
+    <div class="biome-content" id="biome-dungeon">
+      <div class="biome-info">
+        <span class="biome-badge dungeon-badge">Stages 11 – 15</span>
+        <h3 class="biome-title">The Dungeon</h3>
+        <p class="biome-desc">The final and most punishing biome. Tighter arenas, higher spawn rates, and elite enemies appear more frequently. Healing is scarce — survival depends entirely on your build synergy.</p>
+        <div class="biome-stages">
+          <span class="stage-pill">Stage 11</span><span class="stage-pill">Stage 12</span>
+          <span class="stage-pill">Stage 13</span><span class="stage-pill">Stage 14</span>
+          <span class="stage-pill">Stage 15 ☠</span>
+        </div>
+        <div class="boss-card">
+          <div class="boss-label">Final Boss</div>
+          <div class="boss-name">👑 Undead King</div>
+          <p class="boss-desc">The ultimate villain. Commands waves of minions while wielding dark magic and melee attacks. Fast, cunning, and deadly — testing everything the player has learned throughout the entire game.</p>
+        </div>
+      </div>
+      <div class="enemies-list">
+        <div class="enemy-row"><div class="enemy-icon">🐂</div><div><div class="enemy-name">Minotaur</div><div class="enemy-desc">Heavy-hitting ground enemy. Slow but delivers devastating melee attacks and can knock the player back. Requires careful dodging.</div></div></div>
+        <div class="enemy-row"><div class="enemy-icon">🎁</div><div><div class="enemy-name">Mimic</div><div class="enemy-desc">Disguised as a chest, it surprises players with a sudden attack. Moderate health, high damage when triggered. Rewards risk-taking.</div></div></div>
+        <div class="enemy-row"><div class="enemy-icon">⚔️</div><div><div class="enemy-name">Undead Knight (Elite)</div><div class="enemy-desc">Now standard threats in this biome. Appear in overwhelming numbers alongside Minotaurs and aggressive Mage summons.</div></div></div>
+        <div class="enemy-row"><div class="enemy-icon">🧙</div><div><div class="enemy-name">Mage (Elite)</div><div class="enemy-desc">Summons aggressively and more frequently. Must be prioritized or the arena becomes unmanageable within seconds.</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WEAPONS -->
+<section id="weapons">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <span class="section-label">Arsenal</span>
+      <h2 class="section-title">Weapons & Combat</h2>
+      <div class="section-divider"></div>
+      <p class="section-desc">Equip up to five weapon slots per run. All weapons attack automatically — your focus is movement, positioning, and synergy.</p>
+    </div>
+    <div class="weapons-tabs">
+      <button class="weapon-tab active" onclick="switchWeapons('melee',this)">⚔️ Melee</button>
+      <button class="weapon-tab" onclick="switchWeapons('ranged',this)">🏹 Ranged</button>
+    </div>
+    <!-- Melee -->
+    <div class="weapons-panel active" id="weapons-melee">
+      <div class="weapons-grid">
+        <div class="weapon-card reveal"><div class="weapon-name">⚓ Anchor</div><p class="weapon-desc">Crushing blows with slow swings. Heavy impact, capable of staggering enemies.</p></div>
+        <div class="weapon-card reveal"><div class="weapon-name">🗡️ Captain's Sword</div><p class="weapon-desc">A well-balanced blade favored by seasoned fighters. Reliable damage and attack speed.</p></div>
+        <div class="weapon-card reveal"><div class="weapon-name">🔧 Chainsaw</div><p class="weapon-desc">Shreds enemies at close range. High sustained damage, risky due to short reach.</p></div>
+        <div class="weapon-card reveal"><div class="weapon-name">🪓 Chopper</div><p class="weapon-desc">A heavy cleaver built for raw power. Slower attacks, but each hit lands with satisfying force.</p></div>
+        <div class="weapon-card reveal"><div class="weapon-name">⚙️ Circular Saw</div><p class="weapon-desc">Thrown or spun to slice through multiple enemies. Excels at crowd control with continuous damage.</p></div>
+        <div class="weapon-card reveal"><div class="weapon-name">🔬 DEX-Troyer</div><p class="weapon-desc">A high-tech experimental weapon. Rapid strikes with precision-focused damage.</p></div>
+        <div class="weapon-card reveal"><div class="weapon-name">🔩 Drill</div><p class="weapon-desc">Pierces through enemies with constant pressure. Strong against armored targets, close positioning required.</p></div>
+        <div class="weapon-card reveal"><div class="weapon-name">✨ Excalibur</div><p class="weapon-desc">A legendary sword radiating power. Balanced stats with enhanced damage against elite enemies.</p></div>
+        <div class="weapon-card reveal"><div class="weapon-name">🔨 Hammer</div><p class="weapon-desc">A sturdy tool turned weapon. Reliable and straightforward, capable of stunning enemies.</p></div>
+        <div class="weapon-card reveal"><div class="weapon-name">🪓 Hatchet</div><p class="weapon-desc">Lightweight and fast. Ideal for quick strikes and rapid follow-up attacks.</p></div>
+        <div class="weapon-card reveal"><div class="weapon-name">🏇 Jousting Lance</div><p class="weapon-desc">A long-reaching weapon designed for precision. Excels at keeping enemies at a safe distance.</p></div>
+        <div class="weapon-card reveal"><div class="weapon-name">🔪 Knife</div><p class="weapon-desc">Small but deadly. Extremely fast attacks with low base damage — ideal for speed builds.</p></div>
+        <div class="weapon-card reveal"><div class="weapon-name">🏏 Mace</div><p class="weapon-desc">A blunt weapon designed to crush defenses. Effective against tough and shielded enemies.</p></div>
+        <div class="weapon-card reveal"><div class="weapon-name">⚰️ Scythe</div><p class="weapon-desc">Wide, sweeping attacks that hit multiple enemies. Excellent for crowd control.</p></div>
+        <div class="weapon-card reveal"><div class="weapon-name">🌙 Sickle</div><p class="weapon-desc">Fast and curved, ideal for quick slashes. Less damage, but very responsive.</p></div>
+        <div class="weapon-card reveal"><div class="weapon-name">🪃 Spear</div><p class="weapon-desc">A balanced long-range melee weapon. Good reach and consistent damage output.</p></div>
+        <div class="weapon-card reveal"><div class="weapon-name">🗡️ Thief Dagger</div><p class="weapon-desc">Designed for speed and precision. Excels at critical strikes and quick escapes.</p></div>
+        <div class="weapon-card reveal"><div class="weapon-name">🔱 Trident</div><p class="weapon-desc">A three-pronged weapon offering control and reach. Effective against groups and single targets.</p></div>
+        <div class="weapon-card reveal"><div class="weapon-name">🔨 War Hammer</div><p class="weapon-desc">A colossal weapon meant to break anything in its path. Extremely powerful but slow.</p></div>
+        <div class="weapon-card reveal"><div class="weapon-name">🔧 Wrench</div><p class="weapon-desc">An improvised weapon with surprising impact. Balanced and practical, suited for close combat.</p></div>
+      </div>
+    </div>
+    <!-- Ranged -->
+    <div class="weapons-panel" id="weapons-ranged">
+      <div class="weapons-grid">
+        <div class="weapon-card reveal"><div class="weapon-name">🔫 Chain Gun</div><p class="weapon-desc">Fires nonstop. Builds overwhelming pressure but slows movement while firing.</p></div>
+        <div class="weapon-card reveal"><div class="weapon-name">🏹 Crossbow</div><p class="weapon-desc">Precise, high-damage weapon with slower reload. Rewards careful aim and positioning.</p></div>
+        <div class="weapon-card reveal"><div class="weapon-name">💥 Double Barrel Shotgun</div><p class="weapon-desc">Devastating at close range. Fires two powerful blasts before reloading.</p></div>
+        <div class="weapon-card reveal"><div class="weapon-name">🔥 Flamethrower</div><p class="weapon-desc">Unleashes a stream of fire. Excellent for crowd control at short range.</p></div>
+        <div class="weapon-card reveal"><div class="weapon-name">🎵 Flute</div><p class="weapon-desc">A strange magical instrument. Emits waves that damage or disrupt enemies in rhythm.</p></div>
+        <div class="weapon-card reveal"><div class="weapon-name">⚡ Gatling Laser</div><p class="weapon-desc">Fires continuous energy beams. High sustained damage but drains power quickly.</p></div>
+        <div class="weapon-card reveal"><div class="weapon-name">👻 Ghost Scepter</div><p class="weapon-desc">Summons spectral projectiles that pass through enemies. Effective against tightly packed groups.</p></div>
+        <div class="weapon-card reveal"><div class="weapon-name">💣 Grenade Launcher</div><p class="weapon-desc">Lobs explosive grenades in an arc. Strong area damage with delayed detonation.</p></div>
+        <div class="weapon-card reveal"><div class="weapon-name">🎣 Harpoon Gun</div><p class="weapon-desc">Fires a heavy projectile that pierces enemies or pulls them closer. Useful for crowd manipulation.</p></div>
+        <div class="weapon-card reveal"><div class="weapon-name">🧊 Icicle</div><p class="weapon-desc">Launches sharp ice shards. Slows or freezes enemies on hit.</p></div>
+        <div class="weapon-card reveal"><div class="weapon-name">🪃 Javelin</div><p class="weapon-desc">Thrown weapon with long range and strong penetration. Best used with precise timing.</p></div>
+        <div class="weapon-card reveal"><div class="weapon-name">🔦 Laser Gun</div><p class="weapon-desc">Accurate energy weapon with steady fire. Reliable at medium range.</p></div>
+        <div class="weapon-card reveal"><div class="weapon-name">💊 Medical Gun</div><p class="weapon-desc">A support-focused weapon. Heals the Crownless Knight or converts damage into recovery.</p></div>
+        <div class="weapon-card reveal"><div class="weapon-name">🌀 Minigun</div><p class="weapon-desc">Spins up before firing a hail of bullets. Massive damage output but restricts mobility.</p></div>
+        <div class="weapon-card reveal"><div class="weapon-name">☢️ Nuclear Launcher</div><p class="weapon-desc">Fires a devastating projectile that clears the battlefield. Extremely powerful with long cooldowns.</p></div>
+        <div class="weapon-card reveal"><div class="weapon-name">🔫 Pistol</div><p class="weapon-desc">Simple, fast, and reliable. Low damage but easy to use and flexible in combat.</p></div>
+        <div class="weapon-card reveal"><div class="weapon-name">🔫 Revolver</div><p class="weapon-desc">High-damage shots with limited ammo. Rewards precision and timing.</p></div>
+        <div class="weapon-card reveal"><div class="weapon-name">🔫 Rifle</div><p class="weapon-desc">High fire rate and good mobility. Effective at close to medium range.</p></div>
+        <div class="weapon-card reveal"><div class="weapon-name">⭐ Shuriken</div><p class="weapon-desc">Fast, thrown projectiles that can hit multiple targets. Ideal for agile playstyles.</p></div>
+        <div class="weapon-card reveal"><div class="weapon-name">🪄 Wand</div><p class="weapon-desc">A basic magical focus. Fires elemental projectiles with balanced stats.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ITEMS -->
+<section id="items">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <span class="section-label">Shop Phase</span>
+      <h2 class="section-title">Passive Items</h2>
+      <div class="section-divider"></div>
+      <p class="section-desc">Purchase permanent stat upgrades between stages. No weapon slots consumed — pure power scaling across four rarity tiers.</p>
+    </div>
+    <div class="tiers-grid">
+      <div class="tier-block reveal reveal-delay-1">
+        <div class="tier-header">
+          <span class="tier-badge t1-badge">Tier I</span>
+          <span class="tier-name">Common</span>
+        </div>
+        <div class="item-list">
+          <div class="item-row"><span class="item-name">Iron Ring</span><span class="item-details">+2 Damage</span></div>
+          <div class="item-row"><span class="item-name">Worn Boots</span><span class="item-details">+5% Movement Speed</span></div>
+          <div class="item-row"><span class="item-name">Cloth Bandage</span><span class="item-details">+1 Max HP</span></div>
+          <div class="item-row"><span class="item-name">Practice Manual</span><span class="item-details">+5% Attack Speed</span></div>
+          <div class="item-row"><span class="item-name">Lucky Mats</span><span class="item-details">+3% Critical Chance</span></div>
+          <div class="item-row"><span class="item-name">Small Fang</span><span class="item-details">+2% Life Steal</span></div>
+        </div>
+      </div>
+      <div class="tier-block reveal reveal-delay-2">
+        <div class="tier-header">
+          <span class="tier-badge t2-badge">Tier II</span>
+          <span class="tier-name">Uncommon</span>
+        </div>
+        <div class="item-list">
+          <div class="item-row"><span class="item-name">Reinforced Armor</span><span class="item-details">+5 Max HP / −3% Move Spd</span></div>
+          <div class="item-row"><span class="item-name">Sharpening Stone</span><span class="item-details">+4 Damage / −2% Atk Spd</span></div>
+          <div class="item-row"><span class="item-name">Swift Gloves</span><span class="item-details">+10% Atk Speed / −1 Max HP</span></div>
+          <div class="item-row"><span class="item-name">Eagle Eye Charm</span><span class="item-details">+40 Range</span></div>
+          <div class="item-row"><span class="item-name">Hunter's Emblem</span><span class="item-details">+5% Crit / +5 Damage</span></div>
+          <div class="item-row"><span class="item-name">Blood Vial</span><span class="item-details">+5% Life Steal / −2 Max HP</span></div>
+        </div>
+      </div>
+      <div class="tier-block reveal reveal-delay-3">
+        <div class="tier-header">
+          <span class="tier-badge t3-badge">Tier III</span>
+          <span class="tier-name">Epic</span>
+        </div>
+        <div class="item-list">
+          <div class="item-row"><span class="item-name">Berserker's Mark</span><span class="item-details">+8 Dmg / +10% Spd / −5 HP</span></div>
+          <div class="item-row"><span class="item-name">Guardian's Crest</span><span class="item-details">+10 Max HP / +2 HP Regen</span></div>
+          <div class="item-row"><span class="item-name">Phantom Cloak</span><span class="item-details">+15% Move / +15% Atk Spd</span></div>
+          <div class="item-row"><span class="item-name">Arcane Catalyst</span><span class="item-details">+15% Elemental / +20 Range</span></div>
+          <div class="item-row"><span class="item-name">Executioner's Sigil</span><span class="item-details">+20 Damage / +5% Crit</span></div>
+        </div>
+      </div>
+      <div class="tier-block reveal reveal-delay-4">
+        <div class="tier-header">
+          <span class="tier-badge t4-badge">Tier IV</span>
+          <span class="tier-name">Legendary</span>
+        </div>
+        <div class="item-list">
+          <div class="item-row"><span class="item-name">Crown Fragment</span><span class="item-details">+10 Dmg / +10% Spd / +10% Crit</span></div>
+          <div class="item-row"><span class="item-name">Undying Heart</span><span class="item-details">+20 HP / +10% Lifesteal / −5% Spd</span></div>
+          <div class="item-row"><span class="item-name">Relic of the Fallen King</span><span class="item-details">+15% Dmg / +15% Spd / +50 Rng / −10 HP</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MULTIPLAYER -->
+<section id="multiplayer">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <span class="section-label">Co-op</span>
+      <h2 class="section-title">Multiplayer Systems</h2>
+      <div class="section-divider"></div>
+      <p class="section-desc">Designed to test team synergy, spatial awareness, and resource management. Fight side-by-side in local or online co-op.</p>
+    </div>
+    <div class="mp-grid">
+      <div class="mp-modes">
+        <div class="mp-mode reveal">
+          <span class="mp-mode-icon">🖥️</span>
+          <div class="mp-mode-name">Local Co-op (Split-Screen)</div>
+          <p class="mp-mode-desc">Dynamic split-screen that merges when players are close and splits when they separate. Supports Keyboard + Gamepad or dual Gamepads.</p>
+        </div>
+        <div class="mp-mode reveal">
+          <span class="mp-mode-icon">🌐</span>
+          <div class="mp-mode-name">Online Co-op (P2P)</div>
+          <p class="mp-mode-desc">Peer-to-peer architecture ensures responsive, real-time combat synchronization. Both players progress together through the same stages and bosses.</p>
+        </div>
+      </div>
+      <div class="mp-features">
+        <div class="mp-feature reveal">
+          <span class="mp-feat-icon">💰</span>
+          <div>
+            <div class="mp-feat-title">Shared Economy</div>
+            <p class="mp-feat-desc">Gold dropped by enemies is shared — added to a collective bank or duplicated for both players, ensuring fair upgrade access during Shop Phases.</p>
+          </div>
+        </div>
+        <div class="mp-feature reveal">
+          <span class="mp-feat-icon">⚖️</span>
+          <div>
+            <div class="mp-feat-title">Build Synergy</div>
+            <p class="mp-feat-desc">Players choose attributes independently. A Tank can hold the frontline while a Ranger or Assassin deals DPS from the backline.</p>
+          </div>
+        </div>
+        <div class="mp-feature reveal">
+          <span class="mp-feat-icon">📈</span>
+          <div>
+            <div class="mp-feat-title">Dynamic Scaling</div>
+            <p class="mp-feat-desc">Enemy health, spawn rates, and elite frequency scale by 50–75% when two players are active. Bosses actively switch aggro between players.</p>
+          </div>
+        </div>
+        <div class="mp-feature reveal">
+          <span class="mp-feat-icon">💗</span>
+          <div>
+            <div class="mp-feat-title">Revive Mechanic</div>
+            <p class="mp-feat-desc">When a player is downed, their partner can revive them by standing in a revival radius for 3–5 seconds. If both are downed simultaneously, the run ends.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MODES -->
+<section id="modes">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <span class="section-label">Game Modes</span>
+      <h2 class="section-title">Campaign & Endless</h2>
+      <div class="section-divider"></div>
+      <p class="section-desc">Two distinct modes — story-driven progression or infinite survival. Choose your challenge.</p>
+    </div>
+    <div class="modes-grid">
+      <div class="mode-card campaign-card reveal reveal-delay-1">
+        <span class="mode-icon">📜</span>
+        <div class="mode-name">Campaign Mode</div>
+        <p class="mode-desc">The structured story progression of Crownless Knight. Survive 15 stages across three biomes and defeat the Undead King to claim your revenge.</p>
+        <ul class="mode-features">
+          <li>15 total stages across Plains, Forest, and Dungeon</li>
+          <li>3 unique boss encounters (Stage 5, 10, and 15)</li>
+          <li>Shop Phase between every stage</li>
+          <li>Victory sequence with run statistics on completion</li>
+          <li>Option to continue into Endless Mode after finishing</li>
+        </ul>
+      </div>
+      <div class="mode-card endless-card reveal reveal-delay-2">
+        <span class="mode-icon">∞</span>
+        <div class="mode-name">Endless Mode</div>
+        <p class="mode-desc">Remove the stage limit and survive for as long as possible. Difficulty scales infinitely — how far can you push your build?</p>
+        <ul class="mode-features">
+          <li>Unlimited waves with ever-increasing difficulty</li>
+          <li>Higher enemy density, stronger tiers, more elites</li>
+          <li>Shops still appear between waves for continued scaling</li>
+          <li>Leaderboard-style high score progression</li>
+          <li>Pure build optimization and survival challenge</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-name">⚔ Crownless Knight</div>
+        <p class="footer-brand-desc">An arcade dungeon crawler developed by Flow State Studios. Survive waves, build your arsenal, and confront the Undead King.</p>
+        <br>
+        <p class="footer-brand-desc" style="font-size:.75rem;color:var(--text-dim);">R. Torres · R. Mendoza · L. Andula · M. Ibarra</p>
+      </div>
+      <div class="footer-col">
+        <h4>Game</h4>
+        <ul>
+          <li><a href="#story">Story</a></li>
+          <li><a href="#genres">Genres</a></li>
+          <li><a href="#modes">Game Modes</a></li>
+          <li><a href="#biomes">World</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Combat</h4>
+        <ul>
+          <li><a href="#attributes">Builds</a></li>
+          <li><a href="#weapons">Weapons</a></li>
+          <li><a href="#items">Items</a></li>
+          <li><a href="#multiplayer">Multiplayer</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Studio</h4>
+        <ul>
+          <li><a href="#">Flow State Studios</a></li>
+          <li><a href="#">Game Design Doc</a></li>
+          <li><a href="#">© 2026</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 <span>Flow State Studios</span>. All rights reserved.</span>
+      <span>Crownless Knight · Game Design Document · Academic Project</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  /* ── Particles ── */
+  const container = document.getElementById('particles');
+  const colors = ['#c9a227','#8b1a1a','#7040a0','#4466cc'];
+  for(let i=0;i<40;i++){
+    const p = document.createElement('div');
+    p.className = 'particle';
+    const size = Math.random()*4+1;
+    p.style.cssText = `
+      width:${size}px;height:${size}px;
+      background:${colors[Math.floor(Math.random()*colors.length)]};
+      left:${Math.random()*100}%;
+      animation-duration:${Math.random()*20+15}s;
+      animation-delay:${Math.random()*15}s;
+    `;
+    container.appendChild(p);
+  }
+
+  /* ── Progress Bar ── */
+  window.addEventListener('scroll',()=>{
+    const scrolled = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+    document.getElementById('progress-bar').style.width = (scrolled*100)+'%';
+  });
+
+  /* ── Scroll Reveal ── */
+  const observer = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting) e.target.classList.add('visible');
+    });
+  },{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+  /* ── Nav Shrink ── */
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll',()=>{
+    navbar.style.padding = window.scrollY>60 ? '.5rem 5%' : '.9rem 5%';
+  });
+
+  /* ── Biome Switcher ── */
+  function switchBiome(name, btn){
+    document.querySelectorAll('.biome-content').forEach(c=>c.classList.remove('active'));
+    document.querySelectorAll('.biome-tab').forEach(t=>t.classList.remove('active'));
+    document.getElementById('biome-'+name).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  /* ── Weapons Switcher ── */
+  function switchWeapons(name, btn){
+    document.querySelectorAll('.weapons-panel').forEach(p=>p.classList.remove('active'));
+    document.querySelectorAll('.weapon-tab').forEach(t=>t.classList.remove('active'));
+    document.getElementById('weapons-'+name).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  /* ── Mobile Menu ── */
+  function toggleMenu(){
+    const links = document.querySelector('.nav-links');
+    if(links){
+      if(links.style.display === 'flex'){
+        links.style.display='none';
+      } else {
+        links.style.cssText='display:flex;flex-direction:column;position:absolute;top:60px;left:0;right:0;background:rgba(10,6,9,.97);padding:1rem 5%;gap:1.5rem;z-index:999;border-top:1px solid rgba(201,162,39,.2);';
+      }
+    }
+  }
+
+  /* ── Smooth Highlight on Nav Click ── */
+  document.querySelectorAll('a[href^="#"]').forEach(a=>{
+    a.addEventListener('click',e=>{
+      const target = document.querySelector(a.getAttribute('href'));
+      if(target){
+        e.preventDefault();
+        target.scrollIntoView({behavior:'smooth'});
+        // close mobile menu if open
+        const links = document.querySelector('.nav-links');
+        if(links && links.style.flexDirection==='column') links.style.display='none';
+      }
+    });
+  });
+</script>
+</body>
+</html>
